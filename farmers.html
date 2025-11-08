@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet our trusted farmers - FarmFresh connects you with local agricultural heroes">
+    <title>Our Farmers - FarmFresh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f0fdf4;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        nav {
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .stats-section {
+            background: white;
+            padding: 3rem 0;
+            margin: -2rem 0 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.125rem;
+        }
+
+        .filter-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .filter-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .farmers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .farmer-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .farmer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .farmer-header {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .farmer-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0 auto 1rem;
+            border: 4px solid white;
+            box-shadow: var(--shadow);
+        }
+
+        .verified-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .farmer-info {
+            padding: 1.5rem;
+        }
+
+        .farmer-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+            text-align: center;
+        }
+
+        .farmer-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        .farmer-specialty {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .specialty-tag {
+            background: var(--light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .farmer-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+
+        .farmer-stat {
+            text-align: center;
+        }
+
+        .farmer-stat-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .farmer-stat-label {
+            font-size: 0.75rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .farmer-rating {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+            font-size: 1.125rem;
+        }
+
+        .rating-count {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .farmer-description {
+            color: var(--gray);
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .farmer-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .btn-secondary {
+            padding: 0.75rem;
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+        }
+
+        .become-farmer {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .become-farmer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .become-farmer p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-text {
+            opacity: 0.9;
+            font-size: 0.875rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.25rem 2.5rem;
+            background: white;
+            color: var(--secondary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .farmers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-bar {
+                max-width: 100%;
+            }
+
+            .become-farmer h2 {
+                font-size: 1.75rem;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .farmers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        <span style="font-size: 1.5rem;">✓</span>
+        <span id="notificationText">Action completed!</span>
+    </div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div>🌾 Supporting Local Farmers Since 2020</div>
+            <div>🚚 Farm Fresh Delivery Daily</div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-content">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🌾</div>
+                        FarmFresh
+                    </a>
+
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search for farmers, products..." id="searchInput">
+                        <button class="search-btn" onclick="searchFarmers()">🔍</button>
+                    </div>
+
+                    <div class="nav-icons">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-icon">
+                            ❤️
+                            <span class="badge">5</span>
+                        </div>
+                        <div class="nav-icon" id="cartIcon">
+                            🛒
+                            <span class="badge" id="cartCount">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Products.html">Products</a></li>
+                    <li><a href="Categories.html">Categories</a></li>
+                    <li><a href="farmers.html">Our Farmers</a></li>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="Contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Meet Our Farmers</h1>
+            <p>The heroes behind your fresh produce - dedicated, sustainable, and passionate</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span>Our Farmers</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">👨‍🌾</div>
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Active Farmers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🌾</div>
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Acres Farmed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🌱</div>
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Organic Certified</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Browse Our Farmers</h2>
+                <p>Filter by specialty to find the perfect farmer for your needs</p>
+            </div>
+
+            <div class="filter-tabs">
+                <div class="filter-tab active" onclick="filterFarmers('all')">All Farmers</div>
+                <div class="filter-tab" onclick="filterFarmers('vegetables')">Vegetables</div>
+                <div class="filter-tab" onclick="filterFarmers('fruits')">Fruits</div>
+                <div class="filter-tab" onclick="filterFarmers('grains')">Grains</div>
+                <div class="filter-tab" onclick="filterFarmers('dairy')">Dairy</div>
+                <div class="filter-tab" onclick="filterFarmers('organic')">Organic</div>
+            </div>
+
+            <div class="farmers-grid" id="farmersGrid">
+                <!-- Ramesh Farm -->
+                <div class="farmer-card" data-category="vegetables organic">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Ramesh Kumar</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Punjab, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Vegetables</span>
+                            <span class="specialty-tag">Organic</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">45</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">3.5K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">12</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(156 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Specializing in organic leafy greens and seasonal vegetables. Committed to sustainable farming practices.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=ramesh" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Ramesh Kumar')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lakshmi Farm -->
+                <div class="farmer-card" data-category="vegetables organic">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👩‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Lakshmi Devi</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Karnataka, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Vegetables</span>
+                            <span class="specialty-tag">Organic</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">52</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">4.2K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">15</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(298 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Award-winning organic tomato and pepper grower. Known for exceptional quality and freshness.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=lakshmi" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Lakshmi Devi')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sharma Orchards -->
+                <div class="farmer-card" data-category="fruits">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Rajesh Sharma</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Himachal Pradesh, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Fruits</span>
+                            <span class="specialty-tag">Premium</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">38</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">5.8K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">20</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(425 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Premium apple orchards in the Himalayas. Third-generation farmer with expertise in high-altitude fruit cultivation.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=sharma" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Rajesh Sharma')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kumar Farm -->
+                <div class="farmer-card" data-category="grains organic">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Suresh Kumar</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Haryana, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Grains</span>
+                            <span class="specialty-tag">Organic</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">65</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">6.5K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">18</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(523 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Premium basmati rice and wheat grower. Expert in traditional and organic grain farming techniques.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=kumar" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Suresh Kumar')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patel Dairy -->
+                <div class="farmer-card" data-category="dairy">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Mukesh Patel</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Gujarat, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Dairy</span>
+                            <span class="specialty-tag">Fresh</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">42</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">8.1K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">22</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(812 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Farm-fresh dairy products from happy, healthy cows. Daily delivery of milk, yogurt, and cheese.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=patel" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Mukesh Patel')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Singh Apiary -->
+                <div class="farmer-card" data-category="organic">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Balvinder Singh</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Uttarakhand, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Honey</span>
+                            <span class="specialty-tag">Organic</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">28</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">4.7K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">16</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(367 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Pure, raw honey and organic bee products. Sustainable beekeeping practices in the Himalayan foothills.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=singh" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Balvinder Singh')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reddy Poultry -->
+                <div class="farmer-card" data-category="dairy">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Venkat Reddy</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Andhra Pradesh, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Eggs</span>
+                            <span class="specialty-tag">Poultry</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">35</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">7.3K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">14</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(645 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Free-range eggs and ethically raised poultry. No hormones or antibiotics, just natural farming.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=reddy" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Venkat Reddy')">📧</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Verma Farm -->
+                <div class="farmer-card" data-category="vegetables organic">
+                    <div class="farmer-header">
+                        <span class="verified-badge">✓ Verified</span>
+                        <div class="farmer-avatar">👨‍🌾</div>
+                    </div>
+                    <div class="farmer-info">
+                        <h3 class="farmer-name">Ashok Verma</h3>
+                        <div class="farmer-location">
+                            <span>📍</span>
+                            <span>Uttar Pradesh, India</span>
+                        </div>
+                        <div class="farmer-specialty">
+                            <span class="specialty-tag">Vegetables</span>
+                            <span class="specialty-tag">Organic</span>
+                        </div>
+                        <div class="farmer-stats">
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">58</div>
+                                <div class="farmer-stat-label">Products</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">3.9K</div>
+                                <div class="farmer-stat-label">Sales</div>
+                            </div>
+                            <div class="farmer-stat">
+                                <div class="farmer-stat-value">10</div>
+                                <div class="farmer-stat-label">Years</div>
+                            </div>
+                        </div>
+                        <div class="farmer-rating">
+                            <span class="stars">⭐⭐⭐⭐⭐</span>
+                            <span class="rating-count">(234 reviews)</span>
+                        </div>
+                        <p class="farmer-description">Specializing in root vegetables and organic produce. Focus on soil health and sustainable practices.</p>
+                        <div class="farmer-actions">
+                            <a href="Products.html?farmer=verma" class="btn-primary">View Products</a>
+                            <button class="btn-secondary" onclick="contactFarmer('Ashok Verma')">📧</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="become-farmer">
+        <div class="container">
+            <h2>Join Our Farming Community</h2>
+            <p>Are you a farmer looking to reach more customers? Join FarmFresh and sell your products directly to consumers without middlemen. Better prices, wider reach, and full control over your business.</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">💰</div>
+                    <h3 class="benefit-title">Better Earnings</h3>
+                    <p class="benefit-text">Keep 85% of your earnings. No middlemen taking away your profits.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🌐</div>
+                    <h3 class="benefit-title">Wider Reach</h3>
+                    <p class="benefit-text">Access thousands of customers across India looking for fresh produce.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">📱</div>
+                    <h3 class="benefit-title">Easy Management</h3>
+                    <p class="benefit-text">Simple dashboard to manage orders, inventory, and deliveries.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🚚</div>
+                    <h3 class="benefit-title">Logistics Support</h3>
+                    <p class="benefit-text">We handle delivery and logistics so you can focus on farming.</p>
+                </div>
+            </div>
+
+            <a href="#contact" class="cta-button">Start Selling Today</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About FarmFresh</h3>
+                    <p>Connecting farmers directly with consumers for the freshest produce at fair prices. Supporting sustainable agriculture since 2020.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="farmers.html">Our Farmers</a></li>
+                        <li><a href="Products.html">Products</a></li>
+                        <li><a href="Contact.html">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📞 +91 1800-123-4567</li>
+                        <li>📧 support@farmfresh.com</li>
+                        <li>📍 123 Farm Road, Agricultural Zone</li>
+                        <li>⏰ Mon-Sat: 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmFresh. All rights reserved. Made with ❤️ for farmers and consumers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart count management
+        let cartCount = 0;
+
+        // Update cart count from localStorage if available
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedCartCount = localStorage.getItem('cartCount');
+            if (savedCartCount) {
+                cartCount = parseInt(savedCartCount);
+                document.getElementById('cartCount').textContent = cartCount;
+            }
+        });
+
+        // Search functionality
+        function searchFarmers() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            if (searchTerm.trim()) {
+                const farmerCards = document.querySelectorAll('.farmer-card');
+                let foundCount = 0;
+
+                farmerCards.forEach(card => {
+                    const name = card.querySelector('.farmer-name').textContent.toLowerCase();
+                    const location = card.querySelector('.farmer-location').textContent.toLowerCase();
+                    const specialty = card.querySelector('.farmer-specialty').textContent.toLowerCase();
+
+                    if (name.includes(searchTerm) || location.includes(searchTerm) || specialty.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        foundCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (foundCount === 0) {
+                    showNotification('No farmers found matching your search.');
+                } else {
+                    showNotification(`Found ${foundCount} farmer(s) matching your search.`);
+                }
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchFarmers();
+            }
+        });
+
+        // Filter farmers by category
+        function filterFarmers(category) {
+            // Update active tab
+            const tabs = document.querySelectorAll('.filter-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter cards
+            const farmerCards = document.querySelectorAll('.farmer-card');
+            
+            farmerCards.forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const categories = card.getAttribute('data-category');
+                    if (categories.includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            showNotification(`Showing ${category === 'all' ? 'all' : category} farmers`);
+        }
+
+        // Contact farmer
+        function contactFarmer(farmerName) {
+            showNotification(`Opening contact form for ${farmerName}...`);
+            // In a real application, this would open a contact modal or redirect to a contact page
+        }
+
+        // Show notification
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects to farmer cards
+        document.querySelectorAll('.farmer-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

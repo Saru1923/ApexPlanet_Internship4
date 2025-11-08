@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FarmFresh Wishlist - Your favorite products">
+    <title>Wishlist - FarmFresh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f0fdf4;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --red: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        nav {
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .wishlist-section {
+            padding: 3rem 0;
+            min-height: 60vh;
+        }
+
+        .wishlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .wishlist-count {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .clear-all-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .clear-all-btn:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .empty-wishlist {
+            text-align: center;
+            padding: 4rem 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .empty-wishlist-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-wishlist h2 {
+            font-size: 1.75rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .empty-wishlist p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .shop-now-btn {
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .shop-now-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .wishlist-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .wishlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .remove-wishlist {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 10;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.25rem;
+        }
+
+        .remove-wishlist:hover {
+            background: var(--red);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .organic-badge {
+            position: absolute;
+            top: 3rem;
+            left: 1rem;
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: var(--gray);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .farmer-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-current {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-old {
+            font-size: 1.125rem;
+            color: var(--gray);
+            text-decoration: line-through;
+        }
+
+        .price-unit {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .wishlist-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            padding: 0.75rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .wishlist-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wishlist-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        <span style="font-size: 1.5rem;">✓</span>
+        <span id="notificationText">Item added to cart!</span>
+    </div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div>🌾 Supporting Local Farmers Since 2020</div>
+            <div>🚚 Farm Fresh Delivery Daily</div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-content">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🌾</div>
+                        FarmFresh
+                    </a>
+
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search for vegetables, fruits, grains...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+
+                    <div class="nav-icons">
+                        <div class="nav-icon">👤</div>
+                        <a href="wishlist.html" class="nav-icon">
+                            ❤️
+                            <span class="badge" id="wishlistCount">0</span>
+                        </a>
+                        <a href="cart.html" class="nav-icon">
+                            🛒
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Products.html">Products</a></li>
+                    <li><a href="Categories.html">Categories</a></li>
+                    <li><a href="farmers.html">Our Farmers</a></li>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>My Wishlist</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span>Wishlist</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="wishlist-section">
+        <div class="container">
+            <div class="wishlist-header" id="wishlistHeader">
+                <div class="wishlist-count">
+                    Your Wishlist (<strong id="totalWishlistCount">0</strong> items)
+                </div>
+                <button class="clear-all-btn" onclick="clearAllWishlist()" id="clearAllBtn">Clear All</button>
+            </div>
+
+            <div id="wishlistContent">
+                <!-- Wishlist items will be rendered here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About FarmFresh</h3>
+                    <p>Connecting farmers directly with consumers for the freshest produce at fair prices. Supporting sustainable agriculture since 2020.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="farmers.html">Our Farmers</a></li>
+                        <li><a href="Products.html">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📞 +91 1800-123-4567</li>
+                        <li>📧 support@farmfresh.com</li>
+                        <li>📍 123 Farm Road, Agricultural Zone</li>
+                        <li>⏰ Mon-Sat: 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmFresh. All rights reserved. Made with ❤️ for farmers and consumers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function generateStars(rating) {
+            return '⭐'.repeat(rating);
+        }
+
+        function generateBadges(badges) {
+            let badgeHTML = '';
+            badges.forEach((badge, index) => {
+                if (index === 0) {
+                    badgeHTML += `<span class="product-badge">${badge}</span>`;
+                } else {
+                    badgeHTML += `<span class="organic-badge">${badge}</span>`;
+                }
+            });
+            return badgeHTML;
+        }
+
+        function renderWishlist() {
+            const wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+            const wishlistContent = document.getElementById('wishlistContent');
+            const wishlistCount = document.getElementById('wishlistCount');
+            const totalWishlistCount = document.getElementById('totalWishlistCount');
+            const wishlistHeader = document.getElementById('wishlistHeader');
+
+            wishlistCount.textContent = wishlistItems.length;
+            totalWishlistCount.textContent = wishlistItems.length;
+
+            if (wishlistItems.length === 0) {
+                wishlistHeader.style.display = 'none';
+                wishlistContent.innerHTML = `
+                    <div class="empty-wishlist">
+                        <div class="empty-wishlist-icon">💝</div>
+                        <h2>Your wishlist is empty</h2>
+                        <p>Start adding your favorite products to your wishlist!</p>
+                        <a href="Products.html" class="shop-now-btn">Shop Now</a>
+                    </div>
+                `;
+                return;
+            }
+
+            wishlistHeader.style.display = 'flex';
+            
+            let wishlistHTML = '<div class="wishlist-grid">';
+            
+            wishlistItems.forEach(item => {
+                const oldPriceHTML = item.oldPrice 
+                    ? `<span class="price-old">₹${item.oldPrice}</span>` 
+                    : '';
+
+                wishlistHTML += `
+                    <div class="wishlist-card">
+                        <button class="remove-wishlist" onclick="removeFromWishlist(${item.id})">✕</button>
+                        <div class="product-image">
+                            ${item.emoji}
+                            ${generateBadges(item.badges)}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${item.category}</div>
+                            <h3 class="product-title">${item.name}</h3>
+                            <div class="farmer-info">
+                                <span>👨‍🌾</span>
+                                <span>From ${item.farmer}</span>
+                            </div>
+                            <div class="product-rating">
+                                <span class="stars">${generateStars(item.rating)}</span>
+                                <span>(${item.reviews} reviews)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">₹${item.price}</span>
+                                ${oldPriceHTML}
+                            </div>
+                            <div class="price-unit">${item.unit}</div>
+                            <div class="wishlist-actions">
+                                <button class="add-to-cart" onclick="addToCart('${item.name}', ${item.price}, '${item.emoji}', '${item.unit}', '${item.farmer}')">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            wishlistHTML += '</div>';
+            wishlistContent.innerHTML = wishlistHTML;
+        }
+
+        function removeFromWishlist(productId) {
+            let wishlistItems = JSON.parse(localStorage.getItem('wishlistItems')) || [];
+            wishlistItems = wishlistItems.filter(item => item.id !== productId);
+            localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+            
+            showNotification('Item removed from wishlist');
+            renderWishlist();
+        }
+
+        function clearAllWishlist() {
+            if (confirm('Are you sure you want to clear all items from your wishlist?')) {
+                localStorage.setItem('wishlistItems', JSON.stringify([]));
+                showNotification('Wishlist cleared');
+                renderWishlist();
+            }
+        }
+
+        function addToCart(productName, price, emoji, unit, farmer) {
+            let cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+            cartCount++;
+            document.getElementById('cartCount').textContent = cartCount;
+            localStorage.setItem('cartCount', cartCount);
+            
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const existingItemIndex = cartItems.findIndex(item => item.name === productName);
+            
+            if (existingItemIndex > -1) {
+                cartItems[existingItemIndex].quantity += 1;
+            } else {
+                cartItems.push({
+                    name: productName,
+                    price: price,
+                    quantity: 1,
+                    emoji: emoji,
+                    unit: unit,
+                    farmer: farmer
+                });
+            }
+            
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            showNotification(`${productName} added to cart! ₹${price}`);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            notificationText.textContent = message;
+            
+            notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartCount = parseInt(localStorage.getItem('cartCount')) || 0;
+            document.getElementById('cartCount').textContent = cartCount;
+            renderWishlist();
+        });
+    </script>
+</body>
+</html>

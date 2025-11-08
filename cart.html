@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Your Shopping Cart - FarmFresh">
+    <title>Shopping Cart - FarmFresh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f0fdf4;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        nav {
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breadcrumb {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1rem;
+            opacity: 0.9;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .cart-section {
+            padding: 4rem 0;
+        }
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cart-empty-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .cart-empty h2 {
+            font-size: 1.5rem;
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .cart-empty p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 80px 1fr auto;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            align-items: center;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .item-farmer {
+            color: var(--gray);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .item-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .item-unit {
+            font-size: 0.875rem;
+            color: var(--gray);
+        }
+
+        .item-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .qty-display {
+            min-width: 40px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .remove-btn {
+            color: #ef4444;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .remove-btn:hover {
+            color: #dc2626;
+            text-decoration: underline;
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-label {
+            color: var(--gray);
+        }
+
+        .summary-value {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .checkout-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.02);
+        }
+
+        .continue-shopping {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .continue-shopping:hover {
+            background: var(--light);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+            border-left: 4px solid var(--primary);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 60px 1fr;
+                gap: 1rem;
+            }
+
+            .item-actions {
+                grid-column: 1 / -1;
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        <span style="font-size: 1.5rem;">✓</span>
+        <span id="notificationText">Action completed!</span>
+    </div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div>🌾 Supporting Local Farmers Since 2020</div>
+            <div>🚚 Farm Fresh Delivery Daily</div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-content">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🌾</div>
+                        FarmFresh
+                    </a>
+
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search for vegetables, fruits, grains..." id="searchInput">
+                        <button class="search-btn">🔍</button>
+                    </div>
+
+                    <div class="nav-icons">
+                        <div class="nav-icon">👤</div>
+                        <div class="nav-icon">
+                            ❤️
+                            <span class="badge">5</span>
+                        </div>
+                        <a href="cart.html" class="nav-icon" style="text-decoration: none; color: inherit;">
+                            🛒
+                            <span class="badge" id="cartCount">0</span>
+                        </a>
+                    </div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Products.html">Products</a></li>
+                    <li><a href="Categories.html">Categories</a></li>
+                    <li><a href="farmers.html">Our Farmers</a></li>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span>Cart</span>
+            </div>
+        </div>
+    </div>
+
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-layout" id="cartLayout">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About FarmFresh</h3>
+                    <p>Connecting farmers directly with consumers for the freshest produce at fair prices. Supporting sustainable agriculture since 2020.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">About Us</a></li>
+                        <li><a href="farmers.html">Our Farmers</a></li>
+                        <li><a href="Products.html">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📞 +91 1800-123-4567</li>
+                        <li>📧 support@farmfresh.com</li>
+                        <li>📍 123 Farm Road, Agricultural Zone</li>
+                        <li>⏰ Mon-Sat: 8AM - 8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmFresh. All rights reserved. Made with ❤️ for farmers and consumers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Load cart on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCart();
+            updateCartCount();
+        });
+
+        function loadCart() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const cartLayout = document.getElementById('cartLayout');
+
+            if (cartItems.length === 0) {
+                cartLayout.innerHTML = `
+                    <div class="cart-items" style="grid-column: 1 / -1;">
+                        <div class="cart-empty">
+                            <div class="cart-empty-icon">🛒</div>
+                            <h2>Your cart is empty</h2>
+                            <p>Add some fresh products from our farmers to get started!</p>
+                            <a href="Products.html" class="btn-primary">Start Shopping</a>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate totals
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = subtotal > 500 ? 0 : 40;
+            const total = subtotal + deliveryFee;
+
+            // Render cart items
+            let cartHTML = '<div class="cart-items">';
+            
+            cartItems.forEach((item, index) => {
+                cartHTML += `
+                    <div class="cart-item">
+                        <div class="item-image">${item.emoji}</div>
+                        <div class="item-details">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-farmer">
+                                <span>👨‍🌾</span>
+                                <span>From ${item.farmer}</span>
+                            </div>
+                            <div class="item-price">₹${item.price}</div>
+                            <div class="item-unit">${item.unit}</div>
+                        </div>
+                        <div class="item-actions">
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                                <span class="qty-display">${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                            <button class="remove-btn" onclick="removeItem(${index})">🗑️ Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartHTML += '</div>';
+
+            // Render cart summary
+            cartHTML += `
+                <div class="cart-summary">
+                    <h2 class="summary-title">Order Summary</h2>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Subtotal (${cartItems.length} items)</span>
+                        <span class="summary-value">₹${subtotal.toFixed(2)}</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span class="summary-label">Delivery Fee</span>
+                        <span class="summary-value">${deliveryFee === 0 ? 'FREE' : '₹' + deliveryFee.toFixed(2)}</span>
+                    </div>
+                    
+                    ${subtotal < 500 ? '<div class="summary-row"><span class="summary-label" style="font-size: 0.875rem; color: var(--secondary);">Add ₹' + (500 - subtotal).toFixed(2) + ' for free delivery</span><span></span></div>' : ''}
+                    
+                    <div class="summary-total">
+                        <span>Total</span>
+                        <span>₹${total.toFixed(2)}</span>
+                    </div>
+                    
+                    <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+                    <a href="Products.html" class="continue-shopping">Continue Shopping</a>
+                </div>
+            `;
+
+            cartLayout.innerHTML = cartHTML;
+        }
+
+        function updateQuantity(index, change) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            if (cartItems[index]) {
+                cartItems[index].quantity += change;
+                
+                // Remove item if quantity is 0
+                if (cartItems[index].quantity <= 0) {
+                    cartItems.splice(index, 1);
+                }
+                
+                // Update localStorage
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartCount();
+                loadCart();
+                
+                showNotification('Cart updated!');
+            }
+        }
+
+        function removeItem(index) {
+            let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            
+            if (cartItems[index]) {
+                const itemName = cartItems[index].name;
+                cartItems.splice(index, 1);
+                
+                // Update localStorage
+                localStorage.setItem('cartItems', JSON.stringify(cartItems));
+                updateCartCount();
+                loadCart();
+                
+                showNotification(`${itemName} removed from cart`);
+            }
+        }
+
+        function updateCartCount() {
+            const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+            const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            
+            document.getElementById('cartCount').textContent = totalCount;
+            localStorage.setItem('cartCount', totalCount);
+        }
+
+        function checkout() {
+            showNotification('Proceeding to checkout...');
+            // In a real application, this would redirect to checkout page
+            setTimeout(() => {
+                alert('Checkout functionality would be implemented here!');
+            }, 1000);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
