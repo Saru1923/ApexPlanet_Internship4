@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact FarmFresh - Get in touch with us for support, inquiries, or feedback">
+    <title>Contact Us - FarmFresh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #f59e0b;
+            --dark: #1f2937;
+            --light: #f0fdf4;
+            --gray: #6b7280;
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem 0;
+            font-size: 0.875rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        nav {
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s;
+        }
+
+        .nav-icon:hover {
+            color: var(--primary);
+        }
+
+        .badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            padding: 1rem 0;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-info h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .info-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .info-content p {
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+
+        .info-content a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .info-content a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.875rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .map-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .map-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 400px;
+            background: var(--light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--gray);
+            border: 2px dashed #e5e7eb;
+        }
+
+        .faq-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--dark);
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem 1.5rem;
+            background: var(--light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #dcfce7;
+        }
+
+        .faq-question.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .faq-toggle {
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .faq-answer.active {
+            padding: 1.25rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info,
+            .contact-form,
+            .map-section,
+            .faq-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        <span style="font-size: 1.5rem;">✓</span>
+        <span id="notificationText">Message sent successfully!</span>
+    </div>
+
+    <div class="top-bar">
+        <div class="container">
+            <div>🌾 Supporting Local Farmers Since 2020</div>
+            <div>🚚 Farm Fresh Delivery Daily</div>
+        </div>
+    </div>
+
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-content">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon">🌾</div>
+                        FarmFresh
+                    </a>
+
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search for vegetables, fruits, grains...">
+                        <button class="search-btn">🔍</button>
+                    </div>
+
+                    <div class="nav-icons">
+                        <div class="nav-icon" onclick="window.location.href='login.html'">👤</div>
+                        <a href="wishlist.html" class="nav-icon" style="text-decoration: none; color: inherit;">
+                           ❤️
+                           <span class="badge" id="wishlistCount">0</span>
+                       </a>
+                        <a href="cart.html" class="nav-icon" id="cartIcon" style="text-decoration: none; color: inherit;">
+                         🛒
+                        <span class="badge" id="cartCount">0</span>
+                        </a>
+                        <div class="mobile-menu">☰</div>
+                    </div>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="Products.html">Products</a></li>
+                    <li><a href="Categories.html">Categories</a></li>
+                    <li><a href="farmers.html">Our Farmers</a></li>
+                    <li><a href="index.html">About</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you. Get in touch with us!</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span>Contact</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p style="color: var(--gray); margin-bottom: 2rem;">Have questions? We're here to help and would love to hear from you.</p>
+
+                    <div class="info-item">
+                        <div class="info-icon">📍</div>
+                        <div class="info-content">
+                            <h3>Visit Us</h3>
+                            <p>123 Farm Road<br>Agricultural District<br>Tamil Nadu, India - 620001</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📞</div>
+                        <div class="info-content">
+                            <h3>Call Us</h3>
+                            <p><a href="tel:+919876543210">+91 98765 43210</a><br>
+                            <a href="tel:+914312345678">+91 431 234 5678</a></p>
+                            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Mon-Sat: 6:00 AM - 8:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">📧</div>
+                        <div class="info-content">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:info@farmfresh.com">info@farmfresh.com</a><br>
+                            <a href="mailto:support@farmfresh.com">support@farmfresh.com</a></p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="info-icon">⏰</div>
+                        <div class="info-content">
+                            <h3>Working Hours</h3>
+                            <p>Monday - Saturday: 6:00 AM - 8:00 PM<br>
+                            Sunday: 7:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Facebook">📘</a>
+                        <a href="#" class="social-link" title="Instagram">📷</a>
+                        <a href="#" class="social-link" title="Twitter">🐦</a>
+                        <a href="#" class="social-link" title="YouTube">▶️</a>
+                        <a href="#" class="social-link" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h2>Send Us a Message</h2>
+                    <form id="contactForm" onsubmit="return handleSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="order">Order Support</option>
+                                <option value="delivery">Delivery Issue</option>
+                                <option value="farmer">Farmer Partnership</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="map-section">
+                <h2>Find Us on Map</h2>
+                <div class="map-container">
+                    🗺️ Map Location
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What are your delivery hours?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We deliver fresh produce daily from 6:00 AM to 8:00 PM, Monday through Saturday, and 7:00 AM to 6:00 PM on Sundays. Same-day delivery is available for orders placed before 10:00 AM.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I become a farmer partner?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We welcome farmers to join our platform! Simply visit our "Become a Seller" page or contact us at support@farmfresh.com. Our team will guide you through the registration process and help you get started with selling your produce directly to customers.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What is your return policy?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 100% satisfaction guarantee. If you're not satisfied with the quality of your produce, please contact us within 24 hours of delivery. We'll arrange for a replacement or full refund, no questions asked.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Do you offer organic certification?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All our organic products are certified by recognized certification bodies. You can view the certification details on each product page. We work only with verified farmers who follow organic farming practices.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What payment methods do you accept?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We accept all major payment methods including credit/debit cards, UPI, net banking, and cash on delivery. All online transactions are secure and encrypted for your safety.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>FarmFresh</h3>
+                    <p style="opacity: 0.8; margin-top: 1rem;">Connecting farmers directly with consumers for fresher produce and better prices.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Products.html">Products</a></li>
+                        <li><a href="Categories.html">Categories</a></li>
+                        <li><a href="farmers.html">Become a Seller</a></li>
+                        <li><a href="index.html">About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Returns & Refunds</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📧 info@farmfresh.com</li>
+                        <li>📞 +91 98765 43210</li>
+                        <li>📍 123 Farm Road, Agricultural District, India</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmFresh. All rights reserved. | <a href="#" style="color: inherit;">Privacy Policy</a> | <a href="#" style="color: inherit;">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Simulate sending message
+            showNotification(`Thank you ${firstName}! Your message has been sent successfully. We'll get back to you soon.`);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            return false;
+        }
+
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const allQuestions = document.querySelectorAll('.faq-question');
+            const allAnswers = document.querySelectorAll('.faq-answer');
+            
+            // Close all other FAQs
+            allQuestions.forEach(q => {
+                if (q !== element) {
+                    q.classList.remove('active');
+                }
+            });
+            allAnswers.forEach(a => {
+                if (a !== answer) {
+                    a.classList.remove('active');
+                }
+            });
+            
+            // Toggle current FAQ
+            element.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            notification.classList.add('success');
+            notification.style.display = 'flex';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
